@@ -4,6 +4,9 @@ function FileUpload($parse, GumgaMimeTypeService, $http, $timeout) {
 
   let template = `
       <div>
+      <section class="drag">
+           <span  class="glyphicon glyphicon-download-alt"></span>
+       </section>
       <div style="margin-bottom: 10px">
           <input type="file" id="input" ng-hide="true" ng-model="file">
           <button type="button" ng-click="click()" class="btn btn-default">
@@ -164,6 +167,7 @@ function FileUpload($parse, GumgaMimeTypeService, $http, $timeout) {
           },
           data: formDataFile
         }).then((response) => {
+          $scope.model = $scope.model || {};
           $scope.model.name = response.data
         })
       })

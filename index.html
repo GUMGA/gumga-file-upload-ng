@@ -16,15 +16,17 @@
 <body ng-controller="manyToOneCtrl" >
   <div class="gumga-layout">
     <br><br><br>
-    <form name="Example" gumga-form>
-
+    <form name="Example" gumga-form ng-init="entity = { }">
       <div class="col-md-3 col-md-offset-4">
+
+        {{ entity }} <br><br><br>
+
         <gumga-file-upload
           model="entity.comprovante"
           attribute="comprovante"
           accepted="jpeg,zip,rar,deb"
           max-size="1024"
-          endpoint="https://gumga.io/viagem-api/api/viagem/comprovantes?gumgaToken=46L37C150118477473700E1501186574737O35.37.I"
+          endpoint="http://45.79.198.84/storage-api/api/database-file/upload/999999999?gumgaToken=3L3C150118699453700E1501188794537O3.I"
           on-upload-start="uploadStart()"
           on-upload-complete="uploadComplete(e)"
           on-upload-abort="uploadAbort(e)"

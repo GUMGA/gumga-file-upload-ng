@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="yourApp">
+
+<head>
+  <title>Gumga File Upload</title>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <meta name="viewport" content="width=device-width">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://gumga.github.io/layout/gumga-layout/gumga-layout.css"/>
+
+</head>
+
+<body ng-controller="manyToOneCtrl" >
+  <div class="gumga-layout">
+    <br><br><br>
+    <form name="Example" gumga-form>
+
+      <div class="col-md-3 col-md-offset-4">
+        <gumga-file-upload
+          model="entity.comprovante"
+          attribute="comprovante"
+          accepted="jpeg,zip,rar,deb"
+          max-size="1024"
+          endpoint="https://gumga.io/viagem-api/api/viagem/comprovantes?gumgaToken=46L37C150118477473700E1501186574737O35.37.I"
+          on-upload-start="uploadStart()"
+          on-upload-complete="uploadComplete(e)"
+          on-upload-abort="uploadAbort(e)"
+          on-upload-error="uploadError(e)"
+          delete-method="remove()">
+        </gumga-file-upload>
+      </div>
+
+    </form>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="node_modules/angular/angular.min.js"></script>
+  <script src="node_modules/gumga-mimetype-ng/dist/gumga-mimetype.min.js"></script>
+  <script src="dist/gumga-file-upload.js"></script>
+
+  <script>
+    angular.module('yourApp', ['gumga.fileupload', 'gumga.services.mimetype'])
+      .config(function ($httpProvider) {
+        $httpProvider.defaults.headers.common['gumgaToken'] = 'eterno'
+        // $httpProvider.defaults.headers.common['gumgaToken'] = 'homologacaokids'
+        // $httpProvider.defaults.headers.common['gumgaToken'] = 'batistakids'
+      })
+      .controller('manyToOneCtrl', ['$scope', '$http',
+        function ($scope, $http) {
+
+        }
+      ])
+  </script>
+</body>
+</html>

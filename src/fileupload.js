@@ -98,7 +98,6 @@ function FileUpload($parse, GumgaMimeTypeService, $http, $timeout) {
     })
 
     $element[0].ondrop = (event) => {
-      console.log('oi', event);
       stopEvent(event)
       $scope.$apply(() => angular.forEach(event.dataTransfer.files, (file) => addFileToQueue(file)))
       $element.find('section')[0].classList.remove('dragOver')

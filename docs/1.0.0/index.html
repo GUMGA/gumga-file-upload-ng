@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>gumga-file-upload-ng</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://gumga.github.io/components/style.css">
+    <!--<link rel="stylesheet" href="https://gumga.github.io/layout/dist/gumga-layout.css">-->
+
+  </head>
+  <body >
+
+    <nav class="navbar navbar-inverse" ng-controller="VersionController as ctrl">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">gumga-file-upload-ng</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#"
+                 class="dropdown-toggle"
+                 data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ctrl.version}} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li ng-repeat="version in ctrl.versions"><a href="../{{version}}">{{version}}</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container" ng-controller="Ctrl as ctrl">
+      <div class="row">
+        <div class="col-xs-4">
+          <h2>Descrição</h2>
+          <p>O componente gumgaFileUpload pode ser utilizado para fazer upload de arquivos. O framework GUMGA usa um método de upload de imagens que faz o upload do arquivo para uma pasta temporária e retorna um token. Quando o registro é salvo, o framework gumga faz o bind da string que está no atributo com o arquivo temporário.</p> <br>
+          <h2>Dependências</h2>
+          <ul>
+            <li><a href="https://angularjs.org/" target="_blank">AngularJs 1.x</a></li>
+            <li><a href="https://github.com/GUMGA/gumga-mimetype-ng" target="_blank">Gumga Mimetype</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-8">
+          <h3>Instalação</h3>
+          <pre><code class="prettyprint">// NPM
+npm i gumga-file-upload-ng --save
+
+// BOWER
+bower install gumga-file-upload-ng --save
+
+//Modulo
+angular.module('app', ['gumga.fileupload', 'gumga.services.mimetype'])
+
+// NPM
+&lt;script src="node_modules/gumga-file-upload-ng/dist/gumga-file-upload.min.js">&lt;/script>
+
+//BOWER
+&lt;script src="bower_components/gumga-file-upload-ng/dist/gumga-file-upload.min.js">&lt;/script>
+</code></pre>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Usando
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-6">
+              <gumga-file-upload
+                model="entity.comprovante"
+                attribute="comprovante"
+                endpoint="https://gumga.io/viagem-api/api/viagem/comprovantes"
+                on-upload-start="uploadStart()"
+                on-upload-complete="uploadComplete(e)"
+                on-upload-abort="uploadAbort(e)"
+                on-upload-error="uploadError(e)"
+                delete-method="remove()">
+              </gumga-file-upload>
+
+              <label>Result: {{entity.comprovante}}</label>
+
+            </div>
+            <div class="col-xs-6">
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#html" aria-controls="html" role="tab" data-toggle="tab">HTML</a></li>
+                <li role="presentation"><a href="#js" aria-controls="js" role="tab" data-toggle="tab">JavaScript</a></li>
+              </ul>
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="html">
+                  <pre><code class="prettyprint" ng-non-bindable>&lt;gumga-file-upload
+  model="entity.comprovante"
+  attribute="comprovante"
+  endpoint="https://gumga.io/viagem-api/api/viagem/comprovantes"
+  on-upload-start="uploadStart()"
+  on-upload-complete="uploadComplete(e)"
+  on-upload-abort="uploadAbort(e)"
+  on-upload-error="uploadError(e)"
+  delete-method="remove()"&gt;
+&lt;/gumga-file-upload&gt;
+
+&lt;label&gt;Result: {{entity.comprovante}}&lt;/label&gt;</code></pre>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="js">
+                  <pre><code class="prettyprint">angular.module('app', ['gumga.fileupload', 'gumga.services.mimetype'])
+.controller('Ctrl', function($scope, $q, $timeout){
+
+  $scope.entity = {};
+
+   $scope.uploadStart = function() {
+     console.log('START')
+   }
+   $scope.uploadComplete = function(e) {
+     console.log('COMPLETE')
+   }
+   $scope.uploadAbort = function(e) {
+     console.log('ABORT')
+   }
+   $scope.uploadError = function(e) {
+     console.log('ERROR')
+   }
+
+})</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-warning">
+        <b>Atenção</b> O componente fará uma chamada <b>POST</b> para a url informada no atributo <b>endpoint</b> com o nome do parâmetro informado no atributo <b>attribute</b>.
+      </p>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Atributos
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Atributo</th>
+              <th>Tipo</th>
+              <th>Requerido</th>
+              <th>Descrição</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>model</strong></td>
+              <td><code>Object</code></td>
+              <td>Sim</td>
+              <td>Objeto onde será inserido o a resposta do endpoint.</td>
+            </tr>
+            <tr>
+              <td><strong>attribute</strong></td>
+              <td><code>String</code></td>
+              <td>Sim</td>
+              <td>Nome do parâmetro que será passado ao fazer a requisição para o endpoint.</td>
+            </tr>
+            <tr>
+              <td><strong>endpoint</strong></td>
+              <td><code>String</code></td>
+              <td>Sim</td>
+              <td>URL do endpoint onde será enviada a imagem selecionada como <b>POST</b>.</td>
+            </tr>
+            <tr>
+              <td><strong>accepted</strong></td>
+              <td><code>String</code></td>
+              <td>Não</td>
+              <td>Formatos (extensões) aceitos para upload, separados por vírgula. A verificação é feita via mimetype.</td>
+            </tr>
+            <tr>
+              <td><strong>max-size</strong></td>
+              <td><code>Integer</code></td>
+              <td>Não</td>
+              <td>Tamanho máximo em KB aceito por arquivo.</td>
+            </tr>
+            <tr>
+              <td><strong>on-upload-start</strong></td>
+              <td><code>Function</code></td>
+              <td>Não</td>
+              <td>Função que será disparada quando o upload iniciar.</td>
+            </tr>
+            <tr>
+              <td><strong>on-upload-complete</strong></td>
+              <td><code>Function</code></td>
+              <td>Não</td>
+              <td>Função que será disparada quando o upload terminar.</td>
+            </tr>
+            <tr>
+              <td><strong>on-upload-abort</strong></td>
+              <td><code>Function</code></td>
+              <td>Não</td>
+              <td>Função que será disparada se o upload for abortado.</td>
+            </tr>
+            <tr>
+              <td><strong>on-upload-error</strong></td>
+              <td><code>Function</code></td>
+              <td>Não</td>
+              <td>Função que será disparada se houver algum erro.</td>
+            </tr>
+            <tr>
+              <td><strong>delete-method</strong></td>
+              <td><code>Function</code></td>
+              <td>Não</td>
+              <td>Função que será executada para deletar a imagem do espaço temporário.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/gumga-mimetype-ng@1.0.0/dist/gumga-mimetype.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="dist/gumga-file-upload.min.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="https://gumga.github.io/components/app.js"></script>
+
+  </body>
+</html>

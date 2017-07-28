@@ -23,16 +23,15 @@
 
         <gumga-file-upload
           model="entity.comprovante"
-          attribute="comprovante"
-          accepted="jpeg,zip,rar,deb"
-          max-size="1024"
-          endpoint="http://45.79.198.84/storage-api/api/database-file/upload/999999999?gumgaToken=3L3C150118699453700E1501188794537O3.I"
+          attribute="file"
+          endpoint="http://45.79.198.84/storage-api/api/database-file/upload/999999999?gumgaToken=eternoGrands"
           on-upload-start="uploadStart()"
           on-upload-complete="uploadComplete(e)"
           on-upload-abort="uploadAbort(e)"
           on-upload-error="uploadError(e)"
           delete-method="remove()">
         </gumga-file-upload>
+
       </div>
 
     </form>
@@ -49,7 +48,7 @@
   <script>
     angular.module('yourApp', ['gumga.fileupload', 'gumga.services.mimetype'])
       .config(function ($httpProvider) {
-        $httpProvider.defaults.headers.common['gumgaToken'] = 'eterno'
+        // $httpProvider.defaults.headers.common['gumgaToken'] = 'gumgaDocumentationEternal'
         // $httpProvider.defaults.headers.common['gumgaToken'] = 'homologacaokids'
         // $httpProvider.defaults.headers.common['gumgaToken'] = 'batistakids'
       })

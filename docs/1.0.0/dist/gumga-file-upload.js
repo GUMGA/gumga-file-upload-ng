@@ -133,6 +133,7 @@ function FileUpload($parse, GumgaMimeTypeService, $http, $timeout) {
     });
 
     $element[0].ondrop = function (event) {
+      console.log('oi', event);
       stopEvent(event);
       $scope.$apply(function () {
         return angular.forEach(event.dataTransfer.files, function (file) {
